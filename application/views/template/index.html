@@ -1,0 +1,418 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    <title><?php echo isset($title) ?  ucfirst($title) . " | " : null;?>M.Star Capital & Investment Pvt. Ltd</title>
+    <link href="<?php echo base_url(); ?>css/grid.css" rel="stylesheet" type="text/css" >
+    <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" >
+
+
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+    <script src="<?php echo base_url();?>js/jquery.js"></script>
+    <script src="<?php echo base_url(); ?>js/script.js"></script>
+     <script src="<?php echo base_url(); ?>js/autoloadjs.js"></script>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container">
+
+
+            <div class="grid grid8_12" id="site_name">
+                <a href="<?php echo base_url(); ?>">
+                    <span><h1><!--<img src="<?php // echo base_url(); ?>images/logo/iqt-logo.png">-->Mahalaxmi</h1></span>
+                    <small>Bachat Capital & Investment Company</small>
+                </a>
+            </div>
+
+            <div class="grid grid4_12 no_padding">
+
+            <?php if($userdata = $this->session->userdata('logged_in')): ?>
+
+                <div class="grid grid12_12" style="text-align:right">
+                    <span>Welcome  &nbsp;!&nbsp;<span class="typicons-user"></span>&nbsp;<strong><?php //echo ucfirst($userdata['firstname']) . "&nbsp;" .ucfirst($userdata['lastname']) ; ?></strong></span><br>
+                    <span><?php echo  $userdata['email']; ?></span>
+                    <?php echo anchor('logout', 'Logout' , 'class="ac_link"'); ?>
+                </div>
+
+
+
+            <?php else: ?>
+
+                <?php if($this->uri->segment(1)!="admin"): ?>
+
+
+                <div class="grid grid4_12"  "style="text-align: left;">
+
+                    <!--<a href="login" class="ac_link"><span class="typicons-group"></span>&nbsp;Login</a>-->
+                    <?php echo anchor('login', '<span class="typicons-user"></span>&nbsp;Login', 'class="ac_link"'); ?>
+
+                </div>
+                <div class="grid grid8_12 no_gutter register"  style="text-align: left;">
+
+                    <small><em>No Account?</em></small>
+                    &nbsp;
+                    <!--<a href="register" class="ac_link"><span class="typicons-write"></span>Register</a>-->
+                    <?php echo anchor('register', '<span class="typicons-write"></span>&nbsp;Register', 'class="ac_link"'); ?>
+
+                </div>
+
+
+                <?php endif; ?>
+
+            <?php endif; ?>
+
+            </div>
+
+
+            <!--<div class="grid grid4_12" style="text-align: right;">
+                <span class="typicons-user"></span>&nbsp;Welcome&nbsp;!&nbsp;
+                <div class="drop_down">
+                    <?php //echo anchor('#', 'Arun Maharjan', 'class="ac_link"'); ?>
+                </div>
+
+            </div>-->
+
+        </div>
+    </header>
+
+    <div class="body-content">
+<?php
+
+    //---Requires a current active menu_item to show active menu item----
+
+?>
+
+
+
+<div class="container nav_wrap">
+
+    <div class="grid grid12_12" id="main_nav">
+
+        <ul class="clear">
+
+            <li><?php echo anchor('admin', '<span class="typicons-home"></span>&nbsp;home', array("class"=>"home")); ?>
+
+
+        </li>
+
+           <!-- <li><?php //echo anchor('admin/adpost', 'ad post', array("class"=>active_menu_item($cur_menu_item, "adpost"))); ?></li>-->
+
+        <li><?php echo anchor('admin/members', 'Members', array("class"=>active_menu_item($cur_menu_item, "members"))); ?>
+
+        </li>
+
+       <!-- <li><?php //echo anchor('admin/jobtype', 'job type', array("class"=>active_menu_item($cur_menu_item, "jobtype"))); ?></li>-->
+
+        <li><?php echo anchor('admin/account', 'Accounts', array("class"=>active_menu_item($cur_menu_item, "account"))); ?>
+         <ul>
+            <li><a href="#">Saving</a></li>
+            <li><a href="#">Fixed</a></li>
+
+          </ul>
+        </li>
+
+        <li><?php echo anchor('admin/loan', 'Loans', array("class"=>active_menu_item($cur_menu_item, "loan"))); ?>
+         <ul>
+            <li><a href="#">Facility Loan</a></li>
+            <li><a href="#">Mortgage Loan</a></li>
+            <li><a href="#">Lenden Load</a></li>
+          </ul>
+        </li>
+
+     <!--   <li><?php //echo anchor('admin/jobCompleted', 'Job Completed', array("class"=>active_menu_item($cur_menu_item, "jobCompleted"))); ?></li>
+
+            <li><?php //echo anchor('admin/pay', 'Setup Work Id', array("class"=>active_menu_item($cur_menu_item, "pay"))); ?></li>
+-->
+            <li><?php echo anchor('admin/website', 'website', array("class"=>active_menu_item($cur_menu_item, "website"))); ?></li>
+
+            <li><?php echo anchor('admin/withdraw', 'withdraw', array("class"=>active_menu_item($cur_menu_item, "withdraw"))); ?></li>
+
+            <li><?php echo anchor('admin/setup', 'job setup', array("class"=>active_menu_item($cur_menu_item, "setup"))); ?></li>
+
+            <li><?php echo anchor('admin/users', 'users', array("class"=>active_menu_item($cur_menu_item, "users"))); ?></li>
+
+            <li><?php echo anchor('admin/users', 'settings', array("class"=>active_menu_item($cur_menu_item, "users"))); ?></li>
+        </ul>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="container">
+
+    <div class="grid grid8_12">
+        <h2 class="title inline"><?php echo $title; ?></h2>
+
+        <?php if($this->uri->segment(3)!="addnew"): ?>
+
+        &nbsp;
+
+        <?php echo anchor("admin/{$this->uri->segment(2)}/addnew", "Add New",  array("class" => "button")); ?>
+
+        <?php endif; ?>
+
+    </div>
+
+    <div class="grid grid4_12" style="text-align: right;">
+
+        <?php echo form_open('admin/'.$this->uri->segment(2).'/search/', array("method" => "post")) ?>
+
+            <input type="search" name="search" placeholder="Search here" />
+
+        <?php echo form_close(); ?>
+
+        <?php if(isset($search) && !empty($search)): ?>
+            <span>Search Result for <b>'<?php echo $search; ?>'</b></span>
+        <?php endif;?>
+
+    </div>
+
+    <?php if((isset($success_msg)&&!empty($success_msg))||(isset($error_msg)&&!empty($error_msg))) : ?>
+    <div class="grid grid12_12 no_padding">
+
+        <?php if(!empty($success_msg)): ?>
+            <div class="msgbar success"><?php echo $success_msg; ?></div>
+        <?php endif; ?>
+
+         <?php if(!empty($error_msg)): ?>
+            <div class="msgbar error"><?php echo $error_msg; ?></div>
+        <?php endif; ?>
+
+        <?php if(function_exists('validation_errors')): ?>
+
+
+            <?php if(validation_errors()): ?>
+
+                <div class="msgbar error"><?php //echo validation_errors(); ?></div>
+
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+    </div>
+
+    <?php endif; ?>
+
+
+</div>
+
+<div class="container">
+
+<?php echo form_open("admin/members/addnew", array("method" => "post")); ?>
+
+<div class="grid grid12_12" style="text-align: left">
+
+
+    <table>
+        <tr>
+            <td><label for="membership_id">Membership Id</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="number" name="membership_id" id="membership_id" value="<?php echo set_value('membership_id'); ?>" required="required"></td>
+        </tr>
+
+       <?php if(form_error('membership_id')): ?>
+        <tr>
+        	<td></td>
+            <td></td>
+            <td><div class="msgbar error"><?php echo form_error('membership_id'); ?></div></td>
+        </tr>
+        <?php endif; ?>
+
+        <tr>
+            <td><label for="fullname">Full Name</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="fullname" id="fullname" value="<?php echo set_value('fullname'); ?>" required="required" ></td>
+        </tr>
+
+        <?php if(form_error('fullname')): ?>
+        <tr>
+        	<td></td>
+            <td></td>
+            <td><div class="msgbar error"><?php echo form_error('fullname'); ?></div></td>
+        </tr>
+        <?php endif; ?>
+
+        <tr>
+            <td><label for="dob">Date of Birth</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="date" name="dob" id="dob" placeholder="yyyy-mm-dd" value="<?php echo set_value('dob'); ?>" required="required" ></td>
+
+            <td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td>
+
+            <td><label for="citizen">Citizenship No:</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="citizen" id="citizen" value="<?php echo set_value('citizen'); ?>" required="required" ></td>
+        </tr>
+
+        <?php if(form_error('dob')): ?>
+        <tr>
+        	<td></td>
+            <td></td>
+            <td><div class="msgbar error"><?php echo form_error('dob'); ?></div></td>
+        </tr>
+        <?php endif; ?>
+
+
+        <tr>
+            <td><label for="paddress">Permanent Address</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="paddress" id="paddress" value="<?php echo set_value('paddress'); ?>" required="required" ></td>
+        </tr>
+
+         <?php if(form_error('paddress')): ?>
+        <tr>
+        	<td></td>
+            <td></td>
+            <td><div class="msgbar error"><?php echo form_error('paddress'); ?></div></td>
+        </tr>
+        <?php endif; ?>
+
+
+         <tr>
+            <td><label for="taddress">Temporary Address</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="taddress" id="taddress" value="<?php echo set_value('taddress'); ?>" ></td>
+        </tr>
+
+
+        <tr>
+            <td><label for="lastname">Occupation</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="occupation" id="occupation" value="<?php echo set_value('occupation'); ?>"  ></td>
+
+            <td>&nbsp;&nbsp;</td> <td>&nbsp;&nbsp;</td>
+
+            <td><label for="lastname">Office Name</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="officename" id="officename" value="<?php echo set_value('officename'); ?>"  ></td>
+
+        </tr>
+
+
+         <tr>
+            <td><label for="fathername">Father's Name:</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="fathername" id="fathername" value="<?php echo set_value('fathername'); ?>"  ></td>
+
+            <td>&nbsp;&nbsp;</td> <td>&nbsp;&nbsp;</td>
+
+            <td><label for="husbandname">Husband's Name</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="husbandname" id="husbandname" value="<?php echo set_value('husbandname'); ?>"  ></td>
+
+            <td>&nbsp;&nbsp;</td> <td>&nbsp;&nbsp;</td>
+
+            <td><label for="gfathername">Grand Father's Name</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="gfathername" id="gfathername" value="<?php echo set_value('gfathername'); ?>"  ></td>
+        </tr>
+        <tr>
+            <td>  <hr> </td>
+            <td>  <hr> </td>
+            <td>  <hr> </td>
+        </tr>
+        <tr>
+            <td><label for="firstname">Kin of Interest</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="kinname" id="kinname" value="<?php echo set_value('kinname'); ?>" required="required" ></td>
+
+            <td>&nbsp;&nbsp;</td>  <td>&nbsp;&nbsp;</td>
+
+            <td><label for="firstname">Relation</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="kinrelation" id="kinrelation" value="<?php echo set_value('kinrelation'); ?>" required="required" ></td>
+        </tr>
+
+           <?php if(form_error('kinname')): ?>
+        <tr>
+        	<td></td>
+            <td></td>
+            <td><div class="msgbar error"><?php echo form_error('kinname'); ?></div></td>
+        </tr>
+        <?php endif; ?>
+
+        <tr>
+            <td><label for="firstname">Address</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="kinaddress" id="kinaddress" value="<?php echo set_value('kinaddress'); ?>"  ></td>
+
+            <td>&nbsp;&nbsp;</td>  <td>&nbsp;&nbsp;</td>
+
+            <td><label for="firstname">Citizenship No.</label></td>
+            <td>&nbsp;:&nbsp;</td>
+            <td><input type="text" name="kincitizenship" id="kincitizenship" value="<?php echo set_value('kincitizenship'); ?>"  ></td>
+
+        </tr>
+          <tr>
+
+	    <td>Signature Upload</td>
+	    <td>&nbsp;:&nbsp;</td>
+	    <td>
+		<form action="" method="POST" enctype="multipart/form-data" >
+
+            <input type="file" name="userfile" multiple="multiple id="userfile" value="<?php echo set_value('userfile'); ?>"  />
+
+
+		</form>
+
+       </td>
+	</tr>
+ <?php if(form_error('userfile')): ?>
+
+        <tr>
+
+        	<td></td>
+
+            <td></td>
+
+            <td><div class="msgbar error"><?php echo form_error('userfile'); ?></div></td>
+
+        </tr>
+
+        <?php endif; ?>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><br><button type="submit" value="upload" name="add" id="add" class="button"><span class="typicons-tick">&nbsp;Add</span></button> </td>
+        </tr>
+
+    </table>
+
+
+
+
+</div>
+
+<?php echo form_close(); ?>
+
+</div>
+    </div><!--end of body content---->
+
+    <footer>
+        <div class="container no_padding">
+            <div class="grid grid4_12" style="text-align: left;">
+                <span>&copy;&nbsp;2015 All Rights Reserved</span>
+            </div>
+            <div class="grid grid4_12" style="text-align: center">
+                <span><?php echo anchor('home/view/about', 'About us'); ?></span>&nbsp;.
+                <span><?php echo anchor('home/view/terms', 'Terms of use'); ?></span>&nbsp;.
+                <span><?php echo anchor('home/view/policies', 'Policies'); ?></span>&nbsp;.
+                <span><?php echo anchor('home/view/contact', 'Contact us'); ?></span>
+            </div>
+            <div class="grid grid4_12" style="text-align: right;">
+                <span>Powered by: <a href="#" target="_blank">Er. Sunil Maharjan</a></span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
